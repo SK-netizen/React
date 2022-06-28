@@ -1,15 +1,21 @@
 import { useState } from 'react'
 
-export const AddCategory = ({onAddCategories}) => {
+export const AddCategory = ({onNewCategory}) => {
 
     const [inputValue, setinputValue] = useState('')
+    
+    // esta funcion sirve para rellenar el inputText con lo tecleado
     const onInputChange = (event) => {
         setinputValue(event.target.value);
     }
     const onSubmit = (event) => {
         event.preventDefault();
-        if (inputValue.trim().length <= 1 )return;
-        onAddCategories( cat => [inputValue, ...cat]);
+        const newValue = inputValue.trim();
+        if (newValue.length <= 1 )return;
+        // esta es la forma anterior
+        //onAddCategories( cat => [inputValue, ...cat]);
+        onNewCategory(newValue);
+        // pne en blanco lo escrito y se queda el value de inputText de por defecto
         setinputValue('');
         //console.log(inputValue);
     }
