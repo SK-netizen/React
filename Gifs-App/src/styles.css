@@ -4,7 +4,9 @@
 }
 
 body {
-  padding: 60px;
+  padding:0px;
+  margin:100px 0 0 0;
+  border:0px;
 }
 
 input {
@@ -26,6 +28,47 @@ h3 {
   font-size: 3rem;
   margin-bottom: 5px;
 }
+nav{
+  position: fixed;
+  width: 100%;
+  height: auto;
+  margin: -100px 0 0 0 ;
+  padding-bottom: 10px;
+  list-style: none;
+  overflow: hidden; 
+}
+nav div {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  align-content: center;
+}
+.titleButton{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 1fr;
+  justify-content:space-evenly;
+}
+.titleButton div  {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  justify-content:center;
+  align-content: space-evenly;
+}
+
+.titleButton div button  {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.titleButton div button:hover, .titleButton div button:active {
+  background-color: aquamarine;
+}
+
 
 .card-grid {
   display: flex;

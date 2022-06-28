@@ -1,54 +1,44 @@
 import { useState } from 'react';
-import { AddCategory } from './components/AddCategory';
-import { GifGrid } from './components/GifGrid';
-
-const apiKey = "GvcKwGDuoN0DFgvzrgNPpHRD1Mq23njD"
-const url = "api.giphy.com/v1/gifs/random"
+import { AddCategory, GifGrid, GifItem } from './components';
 
 export const GifsExpertApp = () => {
 
-    const [categories, setcategorie] = useState(['Juas Juas', 'Paco']);
-    
+    // cada vez que un huse estate es modificado se redibuja el componente
+    const [categories, setcategorie] = useState([]);
+
     const onAddCategory = (value) => {
-        //setcategorie( [...categories,'SuperMan'] );
-        // de esta forma no diferencai entre mayusculas y minusculas
-        //if ( categories.find( cat => cat.toLowerCase() == value.toLowerCase() ) ) return;
-        // otra forma de acerlo no poder poner dos valores iguales
-        if ( categories.includes(value) ) return;
-        setcategorie( cat => [value, ...cat]);
-        //console.log(value);
+        if (categories.includes(value)) return;
+        setcategorie(cat => [value, ...cat]);
+    }
+    const deleteCategory = (value) => {
+        let catAxus = [];
+        categories.map(cat => {
+            if (cat != value) {
+                catAxus = [...catAxus, cat]
+            }
+        })
+        setcategorie(catAxus);
     }
 
     return (<>
-        {/* Titulo */}
-        <h1>GifsExpertApp</h1>
-
-        {/*Input */}
-        {/* esta es la forma menos correcta
-            ya que es el elemento AddCategory el que inserta
-
-        <AddCategory onAddCategories={ setcategorie }></AddCategory> 
-
-            La forma correcta sera que el elemento 
-            AddCategory devolveriea lo que queremos insertar*/}
-
-        <AddCategory 
-            onNewCategory = { (value) => onAddCategory(value) }
-        ></AddCategory>
-
-        {/*Listado de Gif */}
-        {/* <button onClick={ (event) => onAddCategory("Rick And Morty")}>Agrgar</button> */}
-        <ul>
+        <nav>
+            <h1>GifsExpertApp</h1>
+            <div>
+                <AddCategory
+                    onNewCategory={(value) => onAddCategory(value)}>
+                </AddCategory>
+            </div>
+        </nav>
+        <div className='content'>
             {
-            categories.map(category => {
-                return (
-                    /*Necesita una key porque al mapear es como si fuera un hashmap */
-                        <GifGrid key={category} category={ category }></GifGrid>
+                categories.map(category => {
+                    return (
+                        /*Necesita una key porque al mapear es como si fuera un hashmap */
+                        <GifGrid key={category} category={category} deleteCategory={deleteCategory}></GifGrid>
                     )
                 })
             }
-        </ul>
-        {/*Gif items */}
+        </div>
 
     </>)
 };
